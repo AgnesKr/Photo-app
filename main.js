@@ -11,7 +11,6 @@ axios({
     method: "GET",
     url: "https://api.unsplash.com/photos?page=1&client_id=01b0f4bc8fd2366b73face2e6e307f3fa3e51f23bc492ce26448155cc3d54602"
 }).then((response) => {
-    //res -> obiekt odpowiedzi
     for (let i = 0; i < response.data.length; i++) {
         let imgElement = document.createElement("img")
         imgElement.setAttribute("src", response.data[i].urls.regular)
@@ -26,6 +25,8 @@ axios({
     }
     nextPage = photosElements.getBoundingClientRect().height + photosElements.getBoundingClientRect().top - 100
 })
+
+
 
 inputElement.addEventListener("input", function () {
     isWaiting = true
@@ -89,6 +90,7 @@ window.addEventListener("scroll", function () {
                 nextPage = photosElements.getBoundingClientRect().height + photosElements.getBoundingClientRect().top - 100
                 isWaiting = false
             })
+
         } else {
             axios({
                 url: `https://api.unsplash.com/search/photos?page=${page}&query=${inputElement.value}&client_id=01b0f4bc8fd2366b73face2e6e307f3fa3e51f23bc492ce26448155cc3d54602`
@@ -109,6 +111,5 @@ window.addEventListener("scroll", function () {
                 isWaiting = false
             })
         }
-
     }
 })
